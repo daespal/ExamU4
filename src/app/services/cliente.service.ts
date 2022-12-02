@@ -16,8 +16,6 @@ export class ClienteService {
       telefono:"",
       domicilio:""
     }];
-
-
   }
 
   public validarReservacion(){
@@ -46,5 +44,5 @@ export class ClienteService {
     );
   }
 
-
+  
 }

@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientePage implements OnInit {
 
-  private reservacion: Reservacion[];
+  private reservacion: Reservacion = new Reservacion;
   constructor( private reserService: ClienteService, private router:Router) { }
 
   ngOnInit() {

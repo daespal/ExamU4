@@ -9,11 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdministradorPage implements OnInit {
 
-  private cliente: Cliente[];
+  public clientes: Cliente[] = [];
+  private bool=false
 
   constructor(private clienteservice:ClienteService) { 
     this.clienteservice.getCliente().subscribe(resp=>{
-      this.cliente = resp;
+      this.clientes = resp;
     });
   }
 
@@ -21,4 +22,14 @@ export class AdministradorPage implements OnInit {
     
   }
 
+  public change(){
+    if(this.bool){
+      this.bool=false
+      this.clienteservice.getCliente().subscribe(resp=>{
+        this.clientes = resp;
+      });
+    }else{
+      this.bool=true
+    }
+  }
 }

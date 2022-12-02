@@ -1,6 +1,6 @@
 export class Cliente {
-    nombre:string;
-    telefono:string;
-    domicilio:string;
+    nombre!: string;
+    telefono!: string;
+    domicilio!: string;
     id?:string;
 }

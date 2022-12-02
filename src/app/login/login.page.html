@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Login </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="myForm">
+    <ion-card>
+      <img
+        alt="Silhouette of mountains"
+        src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_960_720.jpg"
+      />
+      <ion-card-header>
+        <ion-card-title>Login</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item class="text">
+          <ion-label position="floating">Usuario</ion-label>
+          <ion-input formControlName="user" placeholder="Usuario"> </ion-input>
+        </ion-item>
+        <ion-button (click)="ingresar()">Ingresar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </form>
+</ion-content>
