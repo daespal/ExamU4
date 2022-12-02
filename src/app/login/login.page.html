@@ -17,7 +17,7 @@
       <ion-card-content>
         <ion-item class="text">
           <ion-label position="floating">Usuario</ion-label>
-          <ion-input formControlName="user" placeholder="Usuario"> </ion-input>
+          <ion-input [(ngModel)]="sLogin.telefono" formControlName="telefono" placeholder="Usuario"> </ion-input>
         </ion-item>
         <ion-button (click)="ingresar()">Ingresar</ion-button>
       </ion-card-content>

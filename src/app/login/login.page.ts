@@ -13,29 +13,39 @@ import { Cliente } from '../models/cliente';
 export class LoginPage implements OnInit {
   myForm!: FormGroup;
   sLogin:Cliente;
+  cliente:Cliente[];
 
  constructor(public fb: FormBuilder, private clienteser:ClienteService,loginService:LoginService,private router: Router) {
-  
-   this.sLogin={
+  this.clienteser.getCliente().subscribe(resp=>{
+    this.cliente = resp;
+  });
+
+  this.sLogin={
     nombre: "",
     telefono: "",
     domicilio: "",
-    id:"",
+    id:""
    }
  }
 
   ngOnInit() {
     this.myForm = this.fb.group({
-      'user': ["",Validators.required],
+      'telefono': ["",Validators.required],
     })
   }
 
   public ingresar(){
-
-    
+    console.log(this.sLogin.telefono)
+    for (let i = 0; i < this.cliente.length; i++) {
+      if(this.cliente[i].telefono == this.sLogin.telefono){
+        this.goHome();
+      }
+    }
   }
  public goHome(){
     this.router.navigate(['/home']);
   }
-
+  public admin(){
+    this.router.navigate(['/administrador']);
+  }
 }
