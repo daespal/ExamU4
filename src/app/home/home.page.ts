@@ -1,4 +1,7 @@
+import { Cliente } from './../models/cliente';
+import { ClienteService } from './../services/cliente.service';
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +10,21 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  private usuario: Cliente[];
+
+  constructor(private clientSer:ClienteService, private activatedRoute: ActivatedRoute, private router: Router) {
+  }
+
+  public getUsuarioById(id:string):void{
+    if(id == "admi"){
+    this.router.navigate(['/administrador'], {
+      queryParams: { id: id },
+    });
+    }else{
+      this.router.navigate(['/administrador'], {
+        queryParams: { id: id },
+      });
+    }
+  }
 
 }
