@@ -16,6 +16,8 @@ export class LoginPage implements OnInit {
   cliente:Cliente[];
 
  constructor(public fb: FormBuilder, private clienteser:ClienteService,loginService:LoginService,private router: Router) {
+
+  
   this.clienteser.getCliente().subscribe(resp=>{
     this.cliente = resp;
   });
@@ -35,12 +37,16 @@ export class LoginPage implements OnInit {
   }
 
   public ingresar(){
-    console.log(this.sLogin.telefono)
+    if(this.sLogin.telefono=="admi"){
+      this.admin();
+    }else{
     for (let i = 0; i < this.cliente.length; i++) {
       if(this.cliente[i].telefono == this.sLogin.telefono){
         this.goHome();
+        this.clienteser.setCurrentUser(this.cliente[i].telefono)
       }
     }
+  }
   }
  public goHome(){
     this.router.navigate(['/home']);
