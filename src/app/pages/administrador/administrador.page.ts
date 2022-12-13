@@ -30,6 +30,11 @@ export class AdministradorPage implements OnInit {
       });
     }else{
       this.bool=true
+      this.clienteservice.getCliente().subscribe(resp=>{
+        this.clientes = resp;
+        this.clientes.sort();
+        console.log(this.clientes);
+      });
     }
   }
 }
