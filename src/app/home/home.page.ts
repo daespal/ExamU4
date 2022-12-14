@@ -17,9 +17,37 @@ import { AlertController } from '@ionic/angular';
 export class HomePage {
   
   private usuario: Cliente[] = [];
+  private res: Cliente[] = [];
+  myDate: String = new Date().toISOString();
+  today: String = new Date().toISOString();
+  public myForm: FormGroup;
+  private reser: Reservacion;
+  total=1000
+  aux=0
+  alberca=500
+  poolbol=false;
+  footbol=false;
+  mesabol=false;
+  brincobol=false;
+  nombre:unknown = ''
+  
+  constructor( private alertController: AlertController,private fb: FormBuilder,private clientSer:ClienteService, private activatedRoute: ActivatedRoute, private router: Router) {
+    if(clientSer.getCurrentUser()==""){
+      this.router.navigate(['/login']);
+    }
+    this.clientSer.getReservacion().subscribe(resp=>{
+      this.res = resp;
+    });
+    this.nombre =  this.clientSer.getUsuarioByTel(clientSer.getCurrentUser());
 
-  constructor(private clientSer:ClienteService, private activatedRoute: ActivatedRoute, private router: Router) {
-    let fecha = Date.now()
+    console.log(this.nombre)
+
+    this.myForm = this.fb.group({
+      fecha:[this.myDate, Validators.compose([Validators.required])],
+      telefono:[clientSer.getCurrentUser()],
+      total:[this.total]
+    });
+
   }
   
   public getUsuarioById(id:string):void{

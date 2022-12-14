@@ -13,11 +13,7 @@ export class ClienteService {
   private res: Reservacion[];
   public currentuser =""
   constructor( private firestore:AngularFirestore) { 
-    this.cliente =[{
-      nombre:"",
-      telefono:"",
-      domicilio:""
-    }]; 
+    
     this.getCliente().subscribe(resp=>{
       this.cliente = resp;
     });
@@ -68,6 +64,7 @@ export class ClienteService {
         return actions.map(a=>{
           const data = a.payload.doc.data() as Cliente;
           const id=a.payload.doc.id;
+          
           return {id,...data}
         })
       })
@@ -75,4 +72,16 @@ export class ClienteService {
   }
 
   
+  public getReservacion2(){
+    return this.firestore.collection('reservacion').snapshotChanges().pipe(
+      map(actions =>{
+        return actions.map(a=>{
+          const data = a.payload.doc.data() as Cliente;
+          const id=a.payload.doc.id;
+          return {id,...data}
+        })
+      })
+    );
+    
+  }
 }
