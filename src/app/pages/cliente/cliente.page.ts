@@ -20,7 +20,6 @@ export class ClientePage implements OnInit {
     this.reservacion = {
       nombre:"",
       telefono:"",
-      nivel:0,
       fecha:"",
       brinco:false,
       mesapos:false,

@@ -5,14 +5,20 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <form [formGroup]="myForm">
   <ion-row>
     <ion-col>
       <ion-item>
-        <ion-datetime min="2022-03-01T00:00:00"></ion-datetime>
+        <ion-datetime formControlName="fecha" displayFormat="MMM DD, h:mm A" [(ngModel)]="myDate" [min]="today"></ion-datetime>
       </ion-item>
       <ion-item>
-        <ion-range
-          [min]="0"
+        <ion-checkbox slot="end"  (ionChange)="pool($event)"></ion-checkbox>
+        <ion-label>Alberca</ion-label></ion-item
+      >
+      <ion-item>
+        <ion-label>Porcentaje alberca</ion-label>
+        <ion-range (ionChange)="range($event)"
+          [min]="1"
           [max]="5"
           [value]="100"
           [pin]="true"
@@ -20,30 +26,31 @@
           [snaps]="true"
         ></ion-range>
       </ion-item>
-      <ion-item>
-        <ion-checkbox slot="end"></ion-checkbox>
-        <ion-label>Alberca</ion-label></ion-item
-      >
+      
       <ion-item
-        ><ion-checkbox slot="end"></ion-checkbox>
+        ><ion-checkbox slot="end" (ionChange)="futbol($event)"></ion-checkbox>
         <ion-label>Futbolito</ion-label>
       </ion-item>
       <ion-item>
-        <ion-checkbox slot="end"></ion-checkbox>
-        <ion-label>Brincolin</ion-label></ion-item
+        <ion-checkbox slot="end"(ionChange)="brincolin($event)"></ion-checkbox>
+        <ion-label >Brincolin</ion-label></ion-item
       >
       <ion-item>
-        <ion-checkbox slot="end"></ion-checkbox>
-        <ion-label>Mesa para postres</ion-label></ion-item
+        <ion-checkbox slot="end" (ionChange)="mesa($event)"></ion-checkbox>
+        <ion-label >Mesa para postres</ion-label></ion-item
+      >
+      <ion-item>
+        <ion-label>Total:{{total}}</ion-label></ion-item
       >
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col size="12">
-      <ion-button color="success" expand="block" shape="round">
+      <ion-button color="success" (click)="validateDate()" expand="block" shape="round">
         <ion-icon name="checkmark-outline"></ion-icon>&nbsp;
         <ion-label class="txtWhite">Guardar</ion-label>
       </ion-button>
     </ion-col>
   </ion-row>
+</form>
 </ion-content>

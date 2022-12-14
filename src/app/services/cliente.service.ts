@@ -10,12 +10,18 @@ import {map} from 'rxjs/operators';
 export class ClienteService {
 
   private cliente: Cliente[];
+  private res: Reservacion[];
+  public currentuser =""
   constructor( private firestore:AngularFirestore) { 
     this.cliente =[{
       nombre:"",
       telefono:"",
       domicilio:""
-    }];
+    }]; 
+    this.getCliente().subscribe(resp=>{
+      this.cliente = resp;
+    });
+
   }
 
   public validarReservacion(){
@@ -27,9 +33,33 @@ export class ClienteService {
     this.firestore.collection('reservacion').add(reservacion);
   }
 
+  public getReservacion(){
+    return this.firestore.collection('reservacion').snapshotChanges().pipe(
+      map(actions =>{
+        return actions.map(a=>{
+          const data = a.payload.doc.data() as Cliente;
+          const id=a.payload.doc.id;
+          return {id,...data}
+        })
+      })
+    );
+  }
+
   public getUsuarioByTel(telefono:string){
-    let result = this.firestore.collection('students').doc(telefono).valueChanges();
-    return result;
+    let item: Cliente = this.cliente.find((cliente)=>{
+      return cliente.telefono===telefono
+    })
+    return item.nombre
+  }
+
+
+
+  public setCurrentUser(user:string){
+    this.currentuser = user;
+  }
+
+  public getCurrentUser(){
+    return this.currentuser;
   }
 
   public getCliente(){

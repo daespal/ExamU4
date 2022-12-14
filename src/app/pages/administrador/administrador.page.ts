@@ -1,6 +1,7 @@
 import { Cliente } from './../../models/cliente';
 import { ClienteService } from './../../services/cliente.service';
 import { Component, OnInit } from '@angular/core';
+import { Reservacion } from 'src/app/models/reservacion';
 
 @Component({
   selector: 'app-administrador',
@@ -10,10 +11,12 @@ import { Component, OnInit } from '@angular/core';
 export class AdministradorPage implements OnInit {
 
   public clientes: Cliente[] = [];
+  public res: Reservacion[] = [];
+
   private bool=false
 
   constructor(private clienteservice:ClienteService) { 
-    this.clienteservice.getCliente().subscribe(resp=>{
+    this.clienteservice.getReservacion().subscribe(resp=>{
       this.clientes = resp;
     });
   }
@@ -25,7 +28,7 @@ export class AdministradorPage implements OnInit {
   public change(){
     if(this.bool){
       this.bool=false
-      this.clienteservice.getCliente().subscribe(resp=>{
+      this.clienteservice.getReservacion().subscribe(resp=>{
         this.clientes = resp;
       });
     }else{
